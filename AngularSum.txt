@@ -1,0 +1,17 @@
+1. Components
+2. Directives
+3. Pipes
+4. Component Communication
+5. Component Life Cycle Hook
+6. Angular Forms
+7. Services & Dependency Injection
+8. Angular Forms Validation
+9. HTTP
+10. Angular Router
+11. Angular Module
+12. Advanced Components
+13. Observable in Angular
+14. Styling
+15. Configuration
+16. Handling Errors
+17. Angular CLI

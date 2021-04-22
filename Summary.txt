@@ -1,0 +1,63 @@
+0. Dependency Injection - Generic Class
+    services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+1. Generic Repository
+GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    Get:
+        _context.Set<T>().ToList();
+        _context.Set<T>().Find(id);
+    Insert:
+        _context.Set<T>().Add(obj);
+    Update:
+        _context.Set<T>().Attach(obj);
+        _context.Entity(obj).State = EntityState.Modified;
+    Delete:
+        _context.Set<T>().Remove(obj);
+    Save:
+        _context.SaveChanges();
+
+2. Generic Repository with generic expression (e.g. x => x.Name.Contains("read"))
+IRepository<T>
+    IReadOnlyList<T> ListAllAsync();
+    IReadOnlyList<T> FindAsync(Expression<Func<T, bool>> query);
+    T GetById(int id);
+    void Add(T obj);
+    void Update(T obj);
+    void Delete(T obj);
+
+3. Specification Pattern
+-Describes a query in an object.
+-Returns an IQueryiable<T> which is an expression tree and is send to a method.
+-Generic List method takes specification as parameter instead of generic expression.
+-Specification can have meaningful name.
+
+Specification --> IQueryable<T> 
+--> GenericRepository.ListAsync(specification instead of expression)
+*Build IQueryiable then finally execute query in DB when it reached a method like ToListAsync();
+*Expression -> DbSet -> IQueryable -> ToList(): execute in DB
+
+4. Enumerable.Aggregage(seed, func)
+IEnumerable<string> strings = new List<string> {"a", "ab", "abc", "abcd"}; 
+int result = strings.Aggregate(0, (count, val) => count + 1);
+    count = 0, val = "a"    --> 0 + 1
+    count = 1, val = "ab"   --> 1 + 1
+    count = 2, val = "abc"  --> 2 + 1
+
+query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+    Includes has several expressions
+        seed = query
+        current1 = query then apply the first expression then the output query becomes the input query
+        current2 = current2 then apply the second expression
+        final result = first query -> apply the first expression -> apply the second expression -> etc
+
+5. Func<> and Expression<Func<>>
+Func<T> = delagate = poiner to a method
+Expression<Func<T>> = a tree data structure for a lambda expression
+IEnumerable doesn't hit the database
+IQueryable
+
+IEnumerable<T> extensions accept Func<T>
+    Func<T> is a pointer to a compiled delegate method.
+IQueryable<T> extensions accept Expression<Func<T>> 
+    Expression<T> is a description of a function that can be comiled to IL at runtime or translated into 
+    whatever language we have provider for.
