@@ -11,10 +11,10 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  @ViewChild('search', {static: false}) searchTerm : ElementRef;
-  products : IProduct[];
-  brands : IBrand[];
-  types : IType[];
+  @ViewChild('search', {static: false}) searchTerm: ElementRef;
+  products: IProduct[];
+  brands: IBrand[];
+  types: IType[];
   shopParams = new ShopParams();
   totalCount: number;
   sortOptions = [
@@ -77,7 +77,7 @@ export class ShopComponent implements OnInit {
   }
 
   onPageChanged(event: any){
-    if(this.shopParams.pageNumber != event) {
+    if(this.shopParams.pageNumber !== event) {
       this.shopParams.pageNumber = event;
       this.getProducts();
     }
