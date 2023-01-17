@@ -1,18 +1,26 @@
 [
   {
     "Id": 1,
-    "Name": "Boards"
+    "Name": "Other"
   },
   {
     "Id": 2,
-    "Name": "Hats"
+    "Name": "Fruit & Vegetables"
   },
   {
     "Id": 3,
-    "Name": "Boots"
+    "Name": "Meat & Seafood"
   },
   {
     "Id": 4,
-    "Name": "Gloves"
+    "Name": "Bakery & Bread"
+  },
+  {
+    "Id": 5,
+    "Name": "Dairy & Eggs"
+  },
+  {
+    "Id": 6,
+    "Name": "Beverages"
   }
 ]
